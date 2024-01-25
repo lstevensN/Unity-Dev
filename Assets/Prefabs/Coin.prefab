@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6272980456391176437}
   - component: {fileID: 7393087596521160418}
   - component: {fileID: 614535268236309295}
+  - component: {fileID: -6972239250244569689}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -148,3 +149,31 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2941193
   m_Center: {x: -0.000000014901161, y: 0, z: 0}
+--- !u!114 &-6972239250244569689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502949815339839507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6018ce153391fd245959624fd09a6f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 11400000, guid: 0ec9c7d46408f914fa6bf43113b34467, type: 2}
+  listener:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7393087596521160418}
+        m_TargetAssemblyTypeName: Pickup, Assembly-CSharp
+        m_MethodName: OnGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

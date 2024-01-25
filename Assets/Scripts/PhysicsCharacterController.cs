@@ -20,7 +20,6 @@ public class PhysicsCharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -50,5 +49,11 @@ public class PhysicsCharacterController : MonoBehaviour
     {
         Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
         return Physics.Raycast(transform.position, Vector3.down, rayLength, groundLayerMask);
+    }
+
+    public void Reset()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }

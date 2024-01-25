@@ -14,6 +14,11 @@ public class Pickup : MonoBehaviour
         }
 
         Instantiate(pickupPrefab, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void OnGameStart()
+    {
+        gameObject.SetActive(true);
     }
 }
