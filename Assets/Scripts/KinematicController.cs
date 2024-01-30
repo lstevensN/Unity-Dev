@@ -25,5 +25,6 @@ public class KinematicController : MonoBehaviour
         transform.localPosition += force;
 
         transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, maxDistance);
+        transform.localRotation = new Quaternion(-direction.y * 0.2f, direction.x * 0.2f, 0, 1);
     }
 }

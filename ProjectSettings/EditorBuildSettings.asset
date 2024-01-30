@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Sun.unity
+    guid: 3feb4ddf7a1fa8c4e91b32356209428d
+  - enabled: 1
+    path: Assets/Scenes/Balls.unity
+    guid: 8a147b683d33a284cac308bdf59c1d9a
+  - enabled: 0
+    path: Assets/Scenes/Roller.unity
+    guid: 5b8639088c698de4ca65e35a390f2dc1
+  - enabled: 0
+    path: Assets/Scenes/Space.unity
+    guid: 1d0d3d0da990dc446be5480ca9a06b41
   m_configObjects: {}

@@ -5,71 +5,89 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] TMP_Text scoreText;
-    [SerializeField] FloatVariable health;
-    [SerializeField] PhysicsCharacterController characterController;
-    [SerializeField] OrbitCamera cameraController;
+    [Header("Controllers")]
+    [SerializeField] PhysicsCharacterController characterController = default;
+    [SerializeField] OrbitCamera cameraController = default;
 
-    [Header("Events")]
-    [SerializeField] IntEvent scoreEvent = default;
-    [SerializeField] VoidEvent playerDeadEvent = default;
-    [SerializeField] VoidEvent gameStartEvent = default;
+    [Header("Properties")]
+    [SerializeField] Transform respawnLocation = default;
 
-    private int score = 0;
+    [Header("Game Elements")]
+    [SerializeField] Light powerLight = default;
+    [SerializeField] GameObject damageFX = default;
 
-    public int Score { 
-        get { return score; }
-        set { 
-            score = value; 
-            scoreText.text = score.ToString();
-            scoreEvent.RaiseEvent(score);
-        } 
-    }
+    private Collider collide;
 
-    private void OnEnable()
+    public void Start()
     {
-        gameStartEvent.Subscribe(OnStartGame);
+        collide = GetComponent<Collider>();
+
+        characterController.enabled = false;
+        cameraController.enabled = false;
     }
 
-    private void Start()
+    public void Update()
     {
-        //
+        // wrapping
+        if (transform.position.x <= -100) transform.position = new Vector3(100, transform.position.y, transform.position.z);
+        else if (transform.position.x >= 100) transform.position = new Vector3(-100, transform.position.y, transform.position.z);
+
+        if (transform.position.z <= -100) transform.position = new Vector3(transform.position.x, transform.position.y, 100);
+        else if (transform.position.z >= 100) transform.position = new Vector3(transform.position.x, transform.position.y, -100);
     }
 
-    public void AddPoints(int points)
+
+    // Event Listener Functions
+    public void OnStartGame()
     {
-        Score += points;
+        OnRespawn();
     }
 
-    private void OnStartGame()
+    public void OnWinGame()
     {
-        characterController.enabled = true;
-        cameraController.enabled = true;
-        health.value = 100.0f;
+        cameraController.enabled = false;
     }
 
-    public void OnEndGame()
+    public void OnLoseGame()
+    {
+        characterController.enabled = false;
+        cameraController.enabled = false;
+
+        collide.enabled = false;
+    }
+
+    public void OnDead()
     {
         characterController.enabled = false;
         cameraController.enabled = false;
     }
 
-    public void Damage(float damage)
+    public void OnRespawn()
     {
-        health.value -= damage;
+        transform.position = respawnLocation.position;
+        transform.rotation = respawnLocation.rotation;
 
-        if (health.value <= 0)
-        {
-            playerDeadEvent.RaiseEvent();
-        }
+        collide.enabled = true;
+        characterController.enabled = true;
+        cameraController.enabled = true;
+        characterController.Reset();
     }
 
-    public void OnRespawn(GameObject respawn)
+    public void OnScore(int points)
     {
-        transform.position = respawn.transform.position;
-        transform.rotation = respawn.transform.rotation;
-        characterController.Reset();
+        powerLight.intensity += points * 0.1f;
+    }
 
-        health.value = 50.0f;
+    public void OnDamage(float damage)
+    {
+        Instantiate(damageFX, transform.position, Quaternion.identity);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("KillZone"))
+        {
+            collide.enabled = false;
+        }
     }
 }

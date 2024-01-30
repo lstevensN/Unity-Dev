@@ -6,21 +6,25 @@ using UnityEngine;
 public class PhysicsCharacterController : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField][Range(1, 10)] float maxForce = 5;
-    [SerializeField][Range(1, 10)] float jumpForce = 5;
+    [SerializeField][Range(1, 20)] float maxForce = 5;
+    [SerializeField][Range(1, 20)] float jumpForce = 10;
     [SerializeField] Transform view;
 
     [Header("Collision")]
     [SerializeField][Range(0, 5)] float rayLength = 1;
     [SerializeField] LayerMask groundLayerMask;
 
+    private AudioSource audioSource;
     Rigidbody rb;
     Vector3 force = Vector3.zero;
+    private bool OnGround = true;
+    private bool slowFall = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,13 +40,22 @@ public class PhysicsCharacterController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && CheckGround())
         {
-            rb.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            audioSource.Play();
         }
+
+        if (rb.velocity.y != 0) OnGround = false;
+        else OnGround = true;
+
+        if (!OnGround && Input.GetMouseButton(0) && rb.velocity.y < 0) slowFall = true;
+        else slowFall = false;
     }
 
     private void FixedUpdate()
     {
         rb.AddForce(force, ForceMode.Force);
+
+        if (OnGround || slowFall) rb.velocity = new Vector3(rb.velocity.x * 0.96f, rb.velocity.y * 0.7f, rb.velocity.z * 0.96f);
     }
 
     private bool CheckGround()

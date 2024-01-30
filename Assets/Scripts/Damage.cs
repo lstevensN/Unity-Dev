@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] float damage = 1;
     [SerializeField] bool oneTime = true;
+
+    [Header("Events")]
+    [SerializeField] FloatEvent damageEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         if (oneTime && other.gameObject.TryGetComponent<Player>(out Player player))
         {
-            player.Damage(damage);
+             damageEvent.RaiseEvent(damage);
         }     
     }
 
@@ -20,7 +24,7 @@ public class Damage : MonoBehaviour
     {
         if (!oneTime && other.gameObject.TryGetComponent<Player>(out Player player))
         {
-            player.Damage(damage * Time.deltaTime);
+            damageEvent.RaiseEvent(damage * Time.deltaTime);
         }
     }
 }
