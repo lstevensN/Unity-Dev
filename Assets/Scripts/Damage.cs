@@ -27,4 +27,9 @@ public class Damage : MonoBehaviour
             damageEvent.RaiseEvent(damage * Time.deltaTime);
         }
     }
+
+    public interface IDamagable
+    {
+        void ApplyDamage(float damage);
+    }
 }

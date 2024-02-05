@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KinematicController : MonoBehaviour
+public class KinematicController : MonoBehaviour, Damage.IDamagable
 {
     [SerializeField, Range(0, 40)] float speed = 1;
     [SerializeField] float maxDistance = 5;
 
-    // Start is called before the first frame update
-    void Start()
+    public float health = 100;
+
+    public void ApplyDamage(float damage)
     {
-        
+
     }
 
     // Update is called once per frame

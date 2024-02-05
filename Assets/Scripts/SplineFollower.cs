@@ -9,10 +9,8 @@ public class SplineFollower : MonoBehaviour
     [SerializeField] SplineContainer splineContainer;
     [Range(0, 40)] public float speed = 1.0f;
 
+    [Range(0, 1)] public float tdistance = 0; // distance along spline (0-1)
 
-    float tdistance = 0; // distance along spline (0-1)
-
-    // public float speed { get; set; }
     public float length { get { return splineContainer.CalculateLength(); } }
     public float distance 
     { 
