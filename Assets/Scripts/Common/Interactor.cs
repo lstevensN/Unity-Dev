@@ -8,7 +8,7 @@ public class Interactor : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
-            interactable.OnEnter();
+            interactable.OnInteractStart(other.gameObject);
         }
     }
 
@@ -16,7 +16,7 @@ public class Interactor : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable))
         {
-            interactable.OnExit();
+            interactable.OnInteractEnd(other.gameObject);
         }
     }
 }
