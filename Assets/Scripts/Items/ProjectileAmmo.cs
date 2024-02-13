@@ -15,7 +15,16 @@ public class ProjectileAmmo : Ammo
             action.onStay += OnInteractActive;
         }
 
-        if (ammoData.force != 0) GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * ammoData.force, ammoData.forceMode);
-        Destroy(gameObject, ammoData.lifetime);
+        RaycastHit hit;
+        Ray target = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(target, out hit)) 
+        {
+            Vector3 point = hit.point;
+            Vector3 force = (point - transform.position).normalized;
+            transform.rotation = Quaternion.LookRotation(force);
+
+            if (ammoData.force != 0) GetComponent<Rigidbody>().AddRelativeForce(force * ammoData.force, ammoData.forceMode);
+            Destroy(gameObject, ammoData.lifetime);
+        }
     }
 }

@@ -1,23 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReticleController : MonoBehaviour
 {
-    [SerializeField, Range(0, 40)] float speed = 1;
-    [SerializeField] float maxDistance = 5;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] BoolVariable engaged;
+
+    [Header("Sprite")]
+    [SerializeField] Texture2D spritePassive;
+
+
+    private void OnMouseEnter()
     {
-        Vector3 direction = Vector3.zero;
+        Cursor.SetCursor(spritePassive, hotSpot, cursorMode);
+    }
 
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
-
-        Vector3 force = direction * speed * Time.deltaTime;
-        transform.localPosition += force;
-
-        transform.localPosition = Vector3.ClampMagnitude(transform.localPosition, maxDistance);
+    private void OnMouseExit()
+    {
+        if (!engaged.value) Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 }

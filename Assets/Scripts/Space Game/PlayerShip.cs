@@ -15,6 +15,8 @@ public class PlayerShip : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] private GameObject hitPrefab;
     [SerializeField] private GameObject destroyPrefab;
 
+    [SerializeField] BoolVariable reticleEngaged;
+
     private void Start()
     {
         health.value = 100;
@@ -31,16 +33,16 @@ public class PlayerShip : MonoBehaviour, IInteractable, IDamagable
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && reticleEngaged.value)
         {
             inventory.Use();
         }
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") || !reticleEngaged.value)
         {
             inventory.StopUse();
         }
 
-        pathFollower.speed = Input.GetKey(KeyCode.Space) ? 30 : 20;
+        //pathFollower.speed = Input.GetKey(KeyCode.Space) ? 30 : 20;
     }
 
     public void OnInteractActive(GameObject gameObject)

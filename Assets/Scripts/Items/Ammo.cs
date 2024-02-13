@@ -23,7 +23,7 @@ public abstract class Ammo : MonoBehaviour, IInteractable
         // destroy game object
         if (ammoData.destroyOnImpact)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 

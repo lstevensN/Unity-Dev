@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fe5654b90a696439b35fc0aff3ffda, type: 3}
+  m_Name: Blaster
+  m_EditorClassIdentifier: 
+  id: 
+  description: 
+  icon: {fileID: 0}
+  allowMultiple: 0
+  equipable: 0
+  usageType: 2
+  animTriggerName: 
+  animEquipName: 
+  rigLayerWeight: []
+  itemPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 0}
+  fireRate: 0.3
+  spread: {x: 0.1, y: 0.1, z: 0.1}
+  rounds: 0
+  ammoPrefab: {fileID: 9103562517587087267, guid: 85159c9da0c385344b5c74287e7d2f7c, type: 3}
