@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : Singleton<GameManager>
+public class BallsGameManager : Singleton<BallsGameManager>
 {
     [Header("GUIs")]
     [SerializeField] GameObject startMenu = default;

@@ -19,9 +19,12 @@ public class ProjectileAmmo : Ammo
         Ray target = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(target, out hit)) 
         {
+
             Vector3 point = hit.point;
             Vector3 force = (point - transform.position).normalized;
-            transform.rotation = Quaternion.LookRotation(force);
+            transform.rotation = Quaternion.LookRotation(hit.point);
+
+            if (force.z < 0f) { force = (transform.position - hit.point).normalized; force.y = -force.y; }
 
             if (ammoData.force != 0) GetComponent<Rigidbody>().AddRelativeForce(force * ammoData.force, ammoData.forceMode);
             Destroy(gameObject, ammoData.lifetime);

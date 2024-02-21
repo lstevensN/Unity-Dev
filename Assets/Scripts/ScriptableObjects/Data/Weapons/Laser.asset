@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 20
   destroyOnImpact: 1
   impactPrefab: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
-  force: 100
+  force: 200
   forceMode: 2
   damageOverTime: 0
   bounce: 0

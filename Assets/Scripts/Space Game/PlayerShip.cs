@@ -16,6 +16,7 @@ public class PlayerShip : MonoBehaviour, IInteractable, IDamagable
     [SerializeField] private GameObject destroyPrefab;
 
     [SerializeField] BoolVariable reticleEngaged;
+    [SerializeField] BoolVariable playerDead;
 
     private void Start()
     {
@@ -75,6 +76,8 @@ public class PlayerShip : MonoBehaviour, IInteractable, IDamagable
             {
                 Instantiate(destroyPrefab, gameObject.transform.position, Quaternion.identity);
             }
+
+            playerDead.value = true;
 
             Destroy(gameObject);
         }
